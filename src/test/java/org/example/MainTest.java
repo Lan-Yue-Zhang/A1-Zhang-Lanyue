@@ -288,4 +288,19 @@ void RESP_01_test_01(){
         System.setOut(originalOut);
         assertEquals(12, newGame.players.get(0).getHand().size());
     }
+
+    @Test
+    @DisplayName("The players draws some card and possibly trims their hand\n")
+    void RESP_07_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.distributeallCards();
+        newGame.distributeCards(newGame.players.get(0), 1);
+        newGame.removeCards(new Scanner("13\n"), newGame.players.get(0));
+        System.setOut(originalOut);
+        assertEquals(12, newGame.players.get(0).getHand().size());
+    }
 }
