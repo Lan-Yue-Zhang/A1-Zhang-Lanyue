@@ -303,4 +303,99 @@ void RESP_01_test_01(){
         System.setOut(originalOut);
         assertEquals(12, newGame.players.get(0).getHand().size());
     }
+    @Test
+    @DisplayName("Plague: current player loses 2 shields\n")
+    void RESP_08_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+        newGame.distributeallCards();
+        newGame.players.get(0).Set_shields(4);
+        newGame.event_deck.add(new Card("E",  "Pl", 2));
+        newGame.draws_event_card(new Scanner(""));
+        assertEquals(2, newGame.players.get(0).Get_shields());
+        newGame.players.get(0).Set_shields(0);
+        newGame.event_deck.add(new Card("E",  "Pl", 2));
+        newGame.draws_event_card(new Scanner(""));
+        assertEquals(0, newGame.players.get(0).Get_shields());
+    }
+
+    @Test
+    @DisplayName("Queen’s favor: current player draws 2 adventure cards \n")
+    void RESP_08_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("E",  "Qf", 4));
+
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+
+        newGame.draws_event_card(new Scanner("B(15)\nL(20)\n"));
+
+        newGame.Displaycard(newGame.players.get(0),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(5)  F(5)  F(15)  F(15)  D(5)  S(10)  S(10)  H(10)  H(10)  B(15)  B(15)  L(20)"));
+        System.setOut(originalOut);
+        assertEquals(12, newGame.players.get(0).getHand().size());
+    }
+
+    @Test
+    @DisplayName("Prosperity: All players draw 2 adventure cards\n")
+    void RESP_08_test_03(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+
+        for (int i = 0; i < 4;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("W",  "D", 5));
+            newGame.deck.add(new Card("W",  "S", 10));
+            newGame.deck.add(new Card("W",  "S", 10));
+            newGame.deck.add(new Card("W",  "H", 10));
+            newGame.deck.add(new Card("W",  "H", 10));
+            newGame.deck.add(new Card("W",  "B", 15));
+            newGame.deck.add(new Card("W",  "B", 15));
+            newGame.deck.add(new Card("W",  "L", 20));
+
+        }
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("E",  "Pr", 4));
+        for (int i = 0; i < 4;i++) {
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "L", 20));
+        }
+        newGame.draws_event_card(new Scanner(" \nB(15)\nL(20)\n \nB(15)\nL(20)\n \nB(15)\nL(20)\n \nB(15)\nL(20)\n \n"));
+        for (int i = 0; i < 4;i++) {
+            newGame.Displaycard(newGame.players.get(i), new PrintWriter(output));
+            assertTrue(output.toString().contains("F(5)  F(5)  F(15)  F(15)  D(5)  S(10)  S(10)  H(10)  H(10)  B(15)  B(15)  L(20)"));
+            System.setOut(originalOut);
+            assertEquals(12, newGame.players.get(i).getHand().size());
+        }
+    }
+
 }
