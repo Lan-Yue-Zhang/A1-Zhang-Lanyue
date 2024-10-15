@@ -259,7 +259,9 @@ public class Main {
         }
     }
     private void exit() {
-
+        System.out.println("Exiting game...");
+        scanner.close();
+        output.close();
     }
     public void draws_event_card(Scanner scanner){
 
