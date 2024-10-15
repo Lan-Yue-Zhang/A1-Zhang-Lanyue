@@ -259,4 +259,33 @@ void RESP_01_test_01(){
         assertTrue(output.contains("P1, please leave the hot seat. Press <return> to continue..."));
         assertTrue(output.contains("current player: 2"));
     }
+
+    @Test
+    @DisplayName("The player enters a valid position or name\n")
+    void RESP_06_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.distributeallCards();
+        newGame.playCard(new Scanner("L(20)\n"),newGame.players.get(0));
+        System.setOut(originalOut);
+        assertEquals(11, newGame.players.get(0).getHand().size());
+    }
+
+    @Test
+    @DisplayName("The player enters non valid position or name\n")
+    void RESP_06_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.distributeallCards();
+        newGame.playCard(new Scanner("13\n"),newGame.players.get(0));
+        System.setOut(originalOut);
+        assertEquals(12, newGame.players.get(0).getHand().size());
+    }
 }
