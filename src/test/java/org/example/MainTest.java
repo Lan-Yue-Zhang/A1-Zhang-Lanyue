@@ -507,4 +507,134 @@ void RESP_01_test_01(){
         newGame.Get_Participants(new Scanner("Y\nF(5)\n \nY\nF(5)\n \nY\nF(5)\n \n"));
         assertEquals(3, newGame.players_Participants.size());
     }
+    @Test
+    @DisplayName("The sponsor enters a necessarily valid position of a card\n")
+    void RESP_11_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        assertEquals(15, newGame.stage[0]);
+        assertEquals(25, newGame.stage[1]);
+        assertEquals(35, newGame.stage[2]);
+        assertEquals(55, newGame.stage[3]);
+
+    }
+    @Test
+    @DisplayName(" ‘Quit’ is entered but the stage has no card associated with it,\n")
+    void RESP_11_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nQuit\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("A stage cannot be empty"));
+
+    }
+    @Test
+    @DisplayName("‘Quit’ is entered but the stage is insufficient value\n")
+    void RESP_11_test_03(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(5)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("Insufficient value for this stage"));
+
+    }
+    @Test
+    @DisplayName("sole foe or non repeated weapon card\n")
+    void RESP_11_test_04(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nH(10)\nF(5)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("Each stage must consist of a single Foe card "));
+        assertTrue(output.contains("non repeated weapon card "));
+    }
 }
