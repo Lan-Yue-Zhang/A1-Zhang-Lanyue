@@ -3,8 +3,6 @@ package org.example;
 import java.io.PrintWriter;
 import java.util.*;
 
-import static java.lang.System.exit;
-
 public class Main {
     public Scanner scanner;
     public PrintWriter output;
@@ -174,7 +172,7 @@ public class Main {
             return false;
         }
     }
-    public Card playCard(Scanner scanner, Player player) {
+    public void playCard(Scanner scanner, Player player) {
         Displaycard(player, output);
         output.println("\n Enter the card you want to draw (e.g. S(10)) or position: ");
         output.flush();
@@ -188,7 +186,7 @@ public class Main {
                 output.println("You removed the card ");
                 output.print(" "+ c.getSuit() + "(" + c.getValue() + ")\n");
                 output.flush();
-                return c;
+                return;
             } else output.print("Please enter the card you have \n");
         } else if (isInteger(temp)) {
             int position = Integer.parseInt(temp);
@@ -199,7 +197,7 @@ public class Main {
                 output.println("You removed the card: ");
                 output.println(" "+ c.getSuit() + "(" + c.getValue() + ")\n");
                 output.flush();
-                return c;
+                return;
             } else {
                 output.println("Invalid position. Please enter a valid card position.");
             }
@@ -209,7 +207,6 @@ public class Main {
         }
 
         output.flush();
-        return null;
     }
     public void Displaycard(Player player, PrintWriter output){
         // Display player's hands
