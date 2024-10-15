@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -134,5 +136,34 @@ void RESP_01_test_01(){
         System.setOut(originalOut);
         String output = outputStream.toString();
         assertTrue(output.contains("The winner is: P1"));
+    }
+
+    @Test
+    @DisplayName("check Game displays the id of each winner.\n")
+    void RESP_04_test_01(){
+        StringWriter output = new StringWriter();
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.players.get(0).Set_shields(7);
+        newGame.players.get(1).Set_shields(7);
+        newGame.determineWinner(new PrintWriter(output));
+        assertTrue(output.toString().contains("The winner is: P1"));
+        assertTrue(output.toString().contains("The winner is: P2"));
+
+    }
+    @Test
+    @DisplayName("check Game terminates \n")
+    void RESP_04_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.players.get(0).Set_shields(7);
+        newGame.distributeallCards();
+        newGame.startRound(new Scanner(""));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("Exiting game..."));
     }
 }
