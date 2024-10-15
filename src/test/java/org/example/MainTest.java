@@ -442,4 +442,69 @@ void RESP_01_test_01(){
         newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
         assertEquals(1, newGame.sponsor);
     }
+
+    @Test
+    @DisplayName("no participants for this quest\n")
+    void RESP_10_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        newGame.Get_Participants(new Scanner(" \n \n \n \n \n \n"));
+
+        assertEquals(0, newGame.players_Participants.size());
+    }
+    @Test
+    @DisplayName("A sponsor has been found\n")
+    void RESP_10_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        StringWriter output = new StringWriter();
+        for (int i = 0; i < 2;i++) {
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 5));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 15));
+            newGame.deck.add(new Card("F", "F", 40));
+            newGame.deck.add(new Card("W", "D", 5));
+            newGame.deck.add(new Card("W", "S", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "H", 10));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "B", 15));
+            newGame.deck.add(new Card("W", "E", 30));
+        }
+
+        newGame.distributeallCards();
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        for (int i = 0; i < 3;i++) newGame.deck.add(new Card("F",  "F", 5));
+        newGame.Get_Participants(new Scanner("Y\nF(5)\n \nY\nF(5)\n \nY\nF(5)\n \n"));
+        assertEquals(3, newGame.players_Participants.size());
+    }
 }
