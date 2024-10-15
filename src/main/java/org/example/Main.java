@@ -344,7 +344,61 @@ public class Main {
         output.flush();
     }
     public void startQRound(Scanner scanner){
+        Get_sponsor(scanner);
+        if (sponsor != 100) {
+            for (int round = 0; round < stage.length; round++) {
+                start_set_stage(scanner);
+            }
+            players_Participants.addAll(players);
+            players_Participants.remove(players.get(sponsor));
+            addcard += stage.length;
+            Player currentPlayer = players.get(current_player);
+            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+            clearConsole();
+        } else {
+            stage = new int[0];
+        }
+    }
+    public void Get_sponsor(Scanner scanner){
+        for (int round = 0; round < players.size(); round++) {
+            output.println("current player: " + players.get(current_player).Get_id());
+            Displaycard(players.get(current_player),output);
+            output.println("\n The game has drawn a Q" + stage.length + " card");
+            output.flush();
+            if (checksponsor(players.get(current_player))) {
+                output.println("\n Do you want to sponsor the current task? Answer Y or N: ");
+                output.flush();
+                String playerans = scanner.nextLine();
+                if (playerans.contains("Y")) {
+                    output.println("P" + players.get(current_player).Get_id() + " is sponsor ");
+                    output.flush();
+                    sponsor = current_player;
+                    break;
+                }
+            } else {
+                output.println("\n player must NECESSARILY have cards that allow for the construction of a valid quest.");
+            }
+            if (sponsor == 100) {
+                Player currentPlayer = players.get(current_player);
+                System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+                scanner.nextLine();
+                clearConsole();
+                if (current_player < players.size()-1) current_player++;
+                else current_player = 0;
+            }
 
+        }
+    }
+    public boolean checksponsor(Player player) {
+        if (player.getHand().size() < stage.length) return false;
+        int f = 0;
+        for (int i = 0; i < player.getHand().size(); i++) {
+            if (player.getHand().get(i).getSuit().equals("F")) {
+                f++;
+            }
+        }
+        return f >= stage.length;
     }
     public void runQRound(Scanner scanner){
 
