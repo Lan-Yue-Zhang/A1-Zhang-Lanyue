@@ -360,6 +360,130 @@ public class Main {
             stage = new int[0];
         }
     }
+    public void start_set_stage(Scanner scanner) {
+        int round = 0;
+        for (int i = 0; i < stage.length; i++) {
+            if (stage[i] == 0) {
+                round = i;
+                break;
+            }
+        }
+        output.println("current player: " + players.get(sponsor).Get_id());
+        current_player = sponsor;
+        boolean done = true;
+        List<org.example.Card> stage_card = new ArrayList<>();
+        List<org.example.Card> stage_card_F = new ArrayList<>();
+        while (done) {
+            output.println("stage : " + (round+1));
+            Displaycard(players.get(sponsor),output);
+            output.println("\n Enter the card you want to play (e.g. S(10)): ");
+            output.flush();
+            String temp = scanner.nextLine();
+            if (!temp.isEmpty() && Check_input_card(temp)){
+                String suit = temp.substring(0, 1);
+                int value = Integer.parseInt(temp.substring(temp.indexOf("(") + 1, temp.indexOf(")")));
+                int c = hasCard(players.get(sponsor),suit,value);
+                if (c != 1111) {
+                    if (suit.equals("F")) {
+                        if (stage_card_F.isEmpty()) {
+                            stage_card_F.add(players.get(sponsor).getHand().get(c));
+                        } else {
+                            output.println("Each stage must consist of a single Foe card \n");
+                        }
+                    } else {
+                        if (!stage_card.contains(players.get(sponsor).getHand().get(c))) {
+                            stage_card.add(players.get(sponsor).getHand().get(c));
+                        } else {
+                            output.println("non repeated weapon card \n");
+                        }
+                    }
+                    output.println("The cards used for this stage: ");
+                    for (Card card : stage_card) {
+                        output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                    }
+                    output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
+
+                } else output.println("Please enter the card you have \n");
+            } else if (isInteger(temp)) {
+                int position = Integer.parseInt(temp);
+                if (position >= 1 && position <= players.get(sponsor).getHand().size()) {
+                    Card c = players.get(sponsor).getHand().get(position - 1);
+                    if (c.getSuit().equals("F")) {
+                        if (stage_card_F.isEmpty()) {
+                            stage_card_F.add(c);
+                        } else {
+                            output.println("Each stage must consist of a single Foe card \n");
+                        }
+                    } else {
+                        if (!stage_card.contains(c)) {
+                            stage_card.add(c);
+                        } else {
+                            output.println("non repeated weapon card \n");
+                        }
+                    }
+                } else {
+                    output.println("Invalid position. Please enter a valid card position.");
+                }
+                output.println("The cards used for this stage: ");
+                for (Card card : stage_card) {
+                    output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                }
+                output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
+
+            } else if (temp.contains("Quit")) {
+                if (stage_card_F.isEmpty()) {
+                    stage_card.clear();
+                    output.println("A stage cannot be empty \n");
+                }
+                else {
+                    int value = stage_card_F.get(0).getValue();
+                    for (Card card : stage_card) {
+                        value += card.getValue();
+                    }
+                    if (round == 0) {
+                        output.println("The cards used for this stage: ");
+                        for (Card card : stage_card) {
+                            output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                            playedCards.add(players.get(sponsor).playedCard(card.getSuit(), card.getValue()));
+                        }
+                        output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
+                        playedCards.add(players.get(sponsor).playedCard(stage_card_F.get(0).getSuit(),stage_card_F.get(0).getValue()));
+                        addcard += 1 + stage_card.size();
+                        stage[round] = value;
+                        done = false;
+                    } else if (value > stage[round-1]) {
+                        output.println("The cards used for this stage: ");
+                        for (Card card : stage_card) {
+                            output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                            playedCards.add(players.get(sponsor).playedCard(card.getSuit(), card.getValue()));
+                        }
+                        output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
+                        playedCards.add(players.get(sponsor).playedCard(stage_card_F.get(0).getSuit(),stage_card_F.get(0).getValue()));
+                        addcard += 1 + stage_card.size();
+                        stage[round] = value;
+                        done = false;
+                    } else {
+                        stage_card.clear();
+                        stage_card_F.clear();
+                        output.println("Insufficient value for this stage \n");
+                    }
+                    output.println();
+                }
+            } else {
+                output.println("Please enter according to the format again \n");
+            }
+            output.flush();
+        }
+    }
+    public int hasCard(org.example.Player player, String suit, int value) {
+        for (int i = 0; i < player.getHand().size(); i++) {
+            if (player.getHand().get(i).getSuit().equals(suit) && player.getHand().get(i).getValue() == value) {
+                return i;
+            }
+        }
+        return 1111;
+
+    }
     public void Get_sponsor(Scanner scanner){
         for (int round = 0; round < players.size(); round++) {
             output.println("current player: " + players.get(current_player).Get_id());
