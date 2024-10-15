@@ -166,4 +166,97 @@ void RESP_01_test_01(){
         String output = outputStream.toString();
         assertTrue(output.contains("Exiting game..."));
     }
+
+    @Test
+    @DisplayName("check displays player’s hand \n")
+    void RESP_05_test_01(){
+        StringWriter output = new StringWriter();
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.distributeallCards();
+        newGame.Displaycard(newGame.players.get(0),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(5)  F(5)  F(15)  F(15)  D(5)  S(10)  S(10)  H(10)  H(10)  B(15)  B(15)  L(20)"));
+    }
+    @Test
+    @DisplayName("check whose turn it is \n")
+    void RESP_05_test_02(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        //p4
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 40));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.deck.add(new Card("W",  "E", 30));
+        //p3
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        //p2
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 40));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "E", 30));
+        //p1
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.distributeallCards();
+
+        newGame.event_deck.add(new Card("Q",  "Q", 4));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\nF(15)\nD(5)\nB(15)\nQuit\nF(40)\nB(15)\nQuit\n \n"));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("P1, please leave the hot seat. Press <return> to continue..."));
+        assertTrue(output.contains("current player: 2"));
+    }
 }
