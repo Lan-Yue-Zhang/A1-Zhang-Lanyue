@@ -248,16 +248,17 @@ public class Main {
                 }
             }
         }
-        output.println("\n"+ player.id + "'s hand:" + temp.size());
+        output.println("\nP"+ player.id + "'s hand:" + temp.size());
         for (Card card : temp) {
             output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
         }
+        output.println();
         player.setHand(temp);
         output.flush();
     }
     public void Displayplayers(PrintWriter output){
         for (int i = 0; i < players_Participants.size(); i++) {
-            output.println("P" + players.get(current_player).Get_id() + " is eligible ");
+            output.println("P" + players_Participants.get(i).Get_id() + " is eligible ");
         }
     }
     public List<Player>  determineWinner( PrintWriter output) {
@@ -279,13 +280,14 @@ public class Main {
             if (stage.length > 0) startQRound(scanner);
             if (sponsor != 100) {
                 runQRound(scanner);
-                if (players_Participants.isEmpty()) endQRound(scanner);
             }
-            output.print("current player: " + players.get(current_player_round).Get_id());
-            Displaycard(players.get(current_player_round),output);
-            Player currentPlayer = players.get(current_player_round);
-            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
-            scanner.nextLine();
+            if (current_player != current_player_round) {
+                output.print("current player: " + players.get(current_player_round).Get_id());
+                Displaycard(players.get(current_player_round),output);
+                Player currentPlayer = players.get(current_player_round);
+                System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+                scanner.nextLine();
+            }
             if (current_player_round < players.size()-1) current_player_round++;
             else current_player_round = 0;
             current_player = current_player_round;
@@ -328,6 +330,7 @@ public class Main {
 
             } else {
                 output.println("The current player has drawn an Prosperity card");
+                output.flush();
                 Player currentPlayer = players.get(current_player);
                 System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
                 scanner.nextLine();
@@ -359,6 +362,7 @@ public class Main {
                 break;
             }
         }
+        output.println("\n");
         output.println("current player: " + players.get(sponsor).Get_id());
         current_player = sponsor;
         boolean done = true;
@@ -367,7 +371,7 @@ public class Main {
         while (done) {
             output.println("stage : " + (round+1));
             Displaycard(players.get(sponsor),output);
-            output.println("\n Enter the card you want to play (e.g. S(10)): ");
+            output.println("Enter the card you want to play (e.g. S(10)): ");
             output.flush();
             String temp = scanner.nextLine();
             if (!temp.isEmpty() && Check_input_card(temp)){
@@ -393,7 +397,7 @@ public class Main {
                         output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
                     }
                     output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
-
+                    output.flush();
                 } else output.println("Please enter the card you have \n");
             } else if (isInteger(temp)) {
                 int position = Integer.parseInt(temp);
@@ -420,7 +424,7 @@ public class Main {
                     output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
                 }
                 output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
-
+                output.flush();
             } else if (temp.contains("Quit")) {
                 if (stage_card_F.isEmpty()) {
                     stage_card.clear();
@@ -460,6 +464,7 @@ public class Main {
                     }
                     output.println();
                 }
+                output.flush();
             } else {
                 output.println("Please enter according to the format again \n");
             }
@@ -518,6 +523,7 @@ public class Main {
             if (playerans.equals("Y")) {
                 distributeCards(players.get(current_player), 1);
                 removeCards(scanner, players.get(current_player));
+                Displaycard(players.get(current_player),output);
             } else {
                 remove_player.add(players.get(current_player));
             }
@@ -586,6 +592,7 @@ public class Main {
                 for (Card card : players.get(current_player).getAttackValueDeck()) {
                     output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
                 }
+                output.flush();
             } else if (isInteger(temp)) {
                 int position = Integer.parseInt(temp);
                 if (position >= 1 && position <= players.get(current_player).getHand().size()) {
@@ -605,6 +612,7 @@ public class Main {
                 for (Card card : players.get(current_player).getAttackValueDeck()) {
                     output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
                 }
+                output.flush();
             } else if (temp.contains("Quit")) {
                 if (!players.get(current_player).getAttackValueDeck().isEmpty()) {
                     int value = stage[round];
@@ -630,6 +638,7 @@ public class Main {
                 } else {
                     output.println("empty set of non repeated weapon cards \n");
                 }
+                output.flush();
                 players.get(current_player).cleanAttackValueDeck();
                 done = false;
             } else {
@@ -637,15 +646,13 @@ public class Main {
             }
             output.flush();
         }
-        if (players_Participants.size() > 1) {
+        if (current_player != next_players || players_Participants.isEmpty()) {
             Player currentPlayer = players.get(current_player);
             System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
             scanner.nextLine();
             clearConsole();
         }
         current_player = next_players;
-
-
     }
     public void startQRound(Scanner scanner){
         Get_sponsor(scanner);
@@ -669,7 +676,8 @@ public class Main {
         for (int round = 0; round < stage.length; round++) {
             Displayplayers(output);
             Get_Participants(scanner);
-            for (int i = 0; i < players_Participants.size(); i++) {
+            int num = players_Participants.size();
+            for (int i = 0; i < num; i++) {
                 start_stage(scanner);
             }
             if (players_Participants.isEmpty()) {
@@ -679,12 +687,11 @@ public class Main {
         endQRound(scanner);
     }
     public void endQRound(Scanner scanner){
+
         distributeCards(players.get(sponsor), addcard);
         if (players.get(sponsor).getHand().size() > 12) {
             output.println("current player: " + players.get(sponsor).Get_id());
             removeCards(scanner, players.get(sponsor));
-            System.out.println("P"+players.get(sponsor).Get_id() + ", please leave the hot seat. Press <return> to continue...");
-            scanner.nextLine();
         }
         stage = new int[0];
         addcard = 0;
