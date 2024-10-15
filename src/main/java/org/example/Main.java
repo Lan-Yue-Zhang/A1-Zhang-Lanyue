@@ -29,8 +29,11 @@ public class Main {
         stage = new int[0];
     }
     public static void main(String[] args) {
-        System.out.printf("Hello and welcome!");
-
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.distributeallCards();
+        newGame.startRound(newGame.scanner);
+        System.exit(0);
     }
     public void initialize_event_Deck(){
         // Create events E cards
@@ -252,8 +255,13 @@ public class Main {
         player.setHand(temp);
         output.flush();
     }
+    public void Displayplayers(PrintWriter output){
+        for (int i = 0; i < players_Participants.size(); i++) {
+            output.println("P" + players.get(current_player).Get_id() + " is eligible ");
+        }
+    }
     public List<Player>  determineWinner( PrintWriter output) {
-        List<org.example.Player>  winner = new ArrayList<>();
+        List<Player>  winner = new ArrayList<>();
         for (int i = players.size() - 1; i >= 0; i--) {
             if (players.get(i).Get_shields() >= 7) {
                 winner.add(players.get(i));
@@ -324,7 +332,7 @@ public class Main {
                 System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
                 scanner.nextLine();
                 clearConsole();
-                for (org.example.Player player : players) {
+                for (Player player : players) {
                     current_player = player.Get_id() -1;
                     output.print("current player: " + players.get(current_player).Get_id());
                     Displaycard(players.get(current_player),output);
@@ -343,23 +351,6 @@ public class Main {
         }
         output.flush();
     }
-    public void startQRound(Scanner scanner){
-        Get_sponsor(scanner);
-        if (sponsor != 100) {
-            for (int round = 0; round < stage.length; round++) {
-                start_set_stage(scanner);
-            }
-            players_Participants.addAll(players);
-            players_Participants.remove(players.get(sponsor));
-            addcard += stage.length;
-            Player currentPlayer = players.get(current_player);
-            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
-            scanner.nextLine();
-            clearConsole();
-        } else {
-            stage = new int[0];
-        }
-    }
     public void start_set_stage(Scanner scanner) {
         int round = 0;
         for (int i = 0; i < stage.length; i++) {
@@ -371,8 +362,8 @@ public class Main {
         output.println("current player: " + players.get(sponsor).Get_id());
         current_player = sponsor;
         boolean done = true;
-        List<org.example.Card> stage_card = new ArrayList<>();
-        List<org.example.Card> stage_card_F = new ArrayList<>();
+        List<Card> stage_card = new ArrayList<>();
+        List<Card> stage_card_F = new ArrayList<>();
         while (done) {
             output.println("stage : " + (round+1));
             Displaycard(players.get(sponsor),output);
@@ -475,7 +466,7 @@ public class Main {
             output.flush();
         }
     }
-    public int hasCard(org.example.Player player, String suit, int value) {
+    public int hasCard(Player player, String suit, int value) {
         for (int i = 0; i < player.getHand().size(); i++) {
             if (player.getHand().get(i).getSuit().equals(suit) && player.getHand().get(i).getValue() == value) {
                 return i;
@@ -656,11 +647,48 @@ public class Main {
 
 
     }
-    public void runQRound(Scanner scanner){
+    public void startQRound(Scanner scanner){
+        Get_sponsor(scanner);
+        if (sponsor != 100) {
+            for (int round = 0; round < stage.length; round++) {
+                start_set_stage(scanner);
+            }
+            players_Participants.addAll(players);
+            players_Participants.remove(players.get(sponsor));
+            addcard += stage.length;
+            Player currentPlayer = players.get(current_player);
+            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+            clearConsole();
+        } else {
+            stage = new int[0];
+        }
+    }
 
+    public void runQRound(Scanner scanner){
+        for (int round = 0; round < stage.length; round++) {
+            Displayplayers(output);
+            Get_Participants(scanner);
+            for (int i = 0; i < players_Participants.size(); i++) {
+                start_stage(scanner);
+            }
+            if (players_Participants.isEmpty()) {
+                break;
+            }
+        }
+        endQRound(scanner);
     }
     public void endQRound(Scanner scanner){
-
+        distributeCards(players.get(sponsor), addcard);
+        if (players.get(sponsor).getHand().size() > 12) {
+            output.println("current player: " + players.get(sponsor).Get_id());
+            removeCards(scanner, players.get(sponsor));
+            System.out.println("P"+players.get(sponsor).Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+        }
+        stage = new int[0];
+        addcard = 0;
+        sponsor = 100;
     }
 
     public void removeCards(Scanner scanner, Player player){
