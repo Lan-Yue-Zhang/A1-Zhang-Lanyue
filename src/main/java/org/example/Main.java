@@ -548,6 +548,114 @@ public class Main {
         }
         return f >= stage.length;
     }
+    public void start_stage(Scanner scanner) {
+        int round = 0;
+        for (int i = 0; i < stage.length; i++) {
+            if (stage[i] > 0) {
+                round = i;
+                break;
+            }
+        }
+        int next_players = current_player;
+        for (int i = 0; i < players_Participants.size(); i++) {
+            if (next_players == players_Participants.get(players_Participants.size()-1).Get_id()-1) {
+                next_players = players_Participants.get(0).Get_id() -1;
+                break;
+            } else if (next_players == players_Participants.get(i).Get_id() -1) {
+                next_players = players_Participants.get(i+1).Get_id() -1;
+                break;
+            }
+        }
+        output.println("current player: " + players.get(current_player).Get_id());
+        boolean done = true;
+        while (done) {
+            Displaycard(players.get(current_player),output);
+            output.println();
+            output.println("stage : " + (round+1));
+            output.print(" Enter the card you want to play (e.g. S(10)): ");
+            output.flush();
+            String temp = scanner.nextLine();
+            if (!temp.isEmpty() && Check_input_card(temp)){
+                String suit = temp.substring(0, 1);
+                int value = Integer.parseInt(temp.substring(temp.indexOf("(") + 1, temp.indexOf(")")));
+                int c = hasCard(players.get(current_player),suit,value);
+                if (c != 100) {
+                    if (suit.equals("F")) output.println("Please enter the weapon card you have \n");
+                    else {
+                        if (!players.get(current_player).getAttackValueDeck().contains(players.get(current_player).getHand().get(c))) {
+                            players.get(current_player).addToAttackValueDeck(players.get(current_player).getHand().get(c));
+                            output.println(" "+ suit + "(" + value + ") ");
+                        } else {
+                            output.println(" "+ suit + "(" + value + ") ");
+                            output.println("non repeated weapon card \n");
+                        }
+                    }
+                } else output.println("Please enter the card you have \n");
+                output.print("\n The value of the cards used in this stage is "+ players.get(current_player).calculateAttackValue() + " : ");
+                for (Card card : players.get(current_player).getAttackValueDeck()) {
+                    output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                }
+            } else if (isInteger(temp)) {
+                int position = Integer.parseInt(temp);
+                if (position >= 1 && position <= players.get(current_player).getHand().size()) {
+                    Card c = players.get(current_player).getHand().get(position - 1);
+                    if (c.getSuit().equals("F")) {
+                        output.println("Please enter the weapon card you have \n");
+                    } else {
+                        if (!players.get(current_player).getAttackValueDeck().contains(c)) {
+                            players.get(current_player).addToAttackValueDeck(c);
+                            output.println(" "+ c.getSuit() + "(" + c.getValue() + ") ");
+                        } else {
+                            output.println("non repeated weapon card \n");
+                        }
+                    }
+                }
+                output.print("\n The value of the cards used in this stage is "+ players.get(current_player).calculateAttackValue() + " : ");
+                for (Card card : players.get(current_player).getAttackValueDeck()) {
+                    output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                }
+            } else if (temp.contains("Quit")) {
+                if (!players.get(current_player).getAttackValueDeck().isEmpty()) {
+                    int value = stage[round];
+                    if (current_player == players_Participants.get(players_Participants.size()-1).Get_id() -1) {
+                        stage[round] = 0;
+                    }
+                    output.print("\n The value of the cards used in this stage is "+ players.get(current_player).calculateAttackValue() + " : ");
+                    for (Card card : players.get(current_player).getAttackValueDeck()) {
+                        output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+                        playedCards.add(players.get(current_player).playedCard(card.getSuit(), card.getValue()));
+                    }
+                    if (players.get(current_player).calculateAttackValue() >= value) {
+                        if (round == stage.length-1) {
+                            int shields = players.get(current_player).Get_shields();
+                            players.get(current_player).Set_shields(shields + stage.length);
+                            players_Participants.remove(players.get(current_player));
+                        }
+                        output.println("\n current stage win \n");
+                    } else {
+                        players_Participants.remove(players.get(current_player));
+                        output.println("\n current stage fail \n");
+                    }
+                } else {
+                    output.println("empty set of non repeated weapon cards \n");
+                }
+                players.get(current_player).cleanAttackValueDeck();
+                done = false;
+            } else {
+                output.println("Please enter according to the format again \n");
+            }
+            output.flush();
+        }
+        if (players_Participants.size() > 1) {
+            Player currentPlayer = players.get(current_player);
+            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+            clearConsole();
+        }
+        current_player = next_players;
+
+
+    }
     public void runQRound(Scanner scanner){
 
     }
