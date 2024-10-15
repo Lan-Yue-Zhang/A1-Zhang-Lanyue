@@ -390,6 +390,30 @@ public class Main {
 
         }
     }
+
+    public void Get_Participants(Scanner scanner){
+        List<Player> remove_player = new ArrayList<>();
+        for (Player playersParticipant : players_Participants) {
+            current_player = playersParticipant.Get_id() - 1;
+            output.println("current player: " + players.get(current_player).Get_id());
+            Displaycard(players.get(current_player),output);
+            output.println("\n Do you want to join the current task? Answer Y: ");
+            output.flush();
+            String playerans = scanner.nextLine();
+            if (playerans.equals("Y")) {
+                distributeCards(players.get(current_player), 1);
+                removeCards(scanner, players.get(current_player));
+            } else {
+                remove_player.add(players.get(current_player));
+            }
+            Player currentPlayer = players.get(current_player);
+            System.out.println("P" + currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+            clearConsole();
+        }
+        players_Participants.removeAll(remove_player);
+        if (!players_Participants.isEmpty()) current_player = players_Participants.get(0).Get_id()-1;
+    }
     public boolean checksponsor(Player player) {
         if (player.getHand().size() < stage.length) return false;
         int f = 0;
