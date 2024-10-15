@@ -320,14 +320,14 @@ public class Main {
                 int shields = players.get(current_player_round).Get_shields();
                 if (shields >= 2) {
                     players.get(current_player_round).Set_shields(shields-2);
-                    output.println("The player "+ current_player_round +" draws this card immediately loses 2 \n" +
+                    output.println("The player "+ players.get(current_player_round).Get_id() +" draws this card immediately loses 2 \n" +
                             "shields");
                 }
+                output.flush();
             } else if (event.getSuit().equals("Qf")) {
                 output.println("The current player has drawn an Queen’s favor card");
                 distributeCards(players.get(current_player_round), 2);
                 removeCards(scanner, players.get(current_player_round));
-
             } else {
                 output.println("The current player has drawn an Prosperity card");
                 output.flush();
@@ -399,6 +399,7 @@ public class Main {
                     output.print(" "+ stage_card_F.get(0).getSuit() + "(" + stage_card_F.get(0).getValue() + ") ");
                     output.flush();
                 } else output.println("Please enter the card you have \n");
+                output.flush();
             } else if (isInteger(temp)) {
                 int position = Integer.parseInt(temp);
                 if (position >= 1 && position <= players.get(sponsor).getHand().size()) {
@@ -498,6 +499,7 @@ public class Main {
                 }
             } else {
                 output.println("\n player must NECESSARILY have cards that allow for the construction of a valid quest.");
+                output.flush();
             }
             if (sponsor == 100) {
                 Player currentPlayer = players.get(current_player);
