@@ -638,6 +638,7 @@ public class Main {
                         output.println("\n current stage fail \n");
                     }
                 } else {
+                    players_Participants.remove(players.get(current_player));
                     output.println("empty set of non repeated weapon cards \n");
                 }
                 output.flush();
