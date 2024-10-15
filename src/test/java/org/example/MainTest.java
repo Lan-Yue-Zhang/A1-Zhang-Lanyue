@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -70,5 +71,51 @@ void RESP_01_test_01(){
         newGame.shuffleDeck(newGame.event_deck);
         assertNotSame(temp.deck, newGame.deck);
         assertNotSame(temp.event_deck, newGame.event_deck);
+    }
+
+    @Test
+    @DisplayName("check Game distributes 12 cards from the adventure deck to each player\n")
+    void RESP_02_test_01(){
+        Main newGame = new Main();
+        newGame.add_all_players();
+        newGame.initializeDeck();
+        newGame.initialize_event_Deck();
+        newGame.shuffleDeck(newGame.deck);
+        newGame.shuffleDeck(newGame.event_deck);
+        newGame.distributeallCards();
+        for (int j = 0; j < newGame.players.size(); j++) {
+            assertEquals(12, newGame.players.get(j).getHand().size());
+        }
+    }
+    @Test
+    @DisplayName("check updating the deck\n")
+    void RESP_02_test_02(){
+        Main newGame = new Main();
+        newGame.add_all_players();
+        newGame.initializeDeck();
+        newGame.initialize_event_Deck();
+        newGame.shuffleDeck(newGame.deck);
+        newGame.shuffleDeck(newGame.event_deck);
+        newGame.distributeallCards();
+        assertEquals((100-12*4), newGame.deck.size());
+    }
+
+    @Test
+    @DisplayName("check discard pile is reused as the deck.\n")
+    void RESP_02_test_03(){
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.distributeCards(newGame.players.get(0),newGame.deck.size());
+        assertEquals(0, newGame.deck.size());
+        assertEquals(0, newGame.playedCards.size());
+        while (!newGame.players.get(0).getHand().isEmpty()) {
+            newGame.playCard(new Scanner("1"),newGame.players.get(0));
+        }
+        assertEquals(0, newGame.deck.size());
+        assertEquals(100, newGame.playedCards.size());
+        newGame.distributeCards(newGame.players.get(0),1);
+        assertEquals(99, newGame.deck.size());
+        assertEquals(0, newGame.playedCards.size());
+
     }
 }
