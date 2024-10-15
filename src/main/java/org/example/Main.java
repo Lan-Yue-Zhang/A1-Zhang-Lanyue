@@ -212,7 +212,48 @@ public class Main {
         return null;
     }
     public void Displaycard(Player player, PrintWriter output){
-
+        // Display player's hands
+        List<Card> temp = new ArrayList<>();
+        temp.add(player.getHand().get(0));
+        for (int i = 1; i < player.getHand().size(); i++) {
+            Card newcard = player.getHand().get(i);
+            for (int j = 0; j < temp.size(); j++) {
+                if (newcard.getSuit().equals("F")) {
+                    if (!temp.get(j).getSuit().equals("F")) {
+                        temp.add(j, newcard);
+                        break;
+                    } else if (newcard.getValue() <= temp.get(j).getValue() && temp.get(j).getSuit().equals("F")) {
+                        temp.add(j, newcard);
+                        break;
+                    } else if (j == temp.size() - 1) {
+                        temp.add(newcard);
+                        break;
+                    }
+                } else if (newcard.getValue() <= temp.get(j).getValue() && !temp.get(j).getSuit().equals("F")) {
+                    if (newcard.getSuit().equals("H")) {
+                        if (!temp.get(j).getSuit().equals("S") || temp.get(j).getSuit().equals("H")) {
+                            temp.add(j, newcard);
+                            break;
+                        } else if (j == temp.size() - 1) {
+                            temp.add(newcard);
+                            break;
+                        }
+                    } else {
+                        temp.add(j, newcard);
+                        break;
+                    }
+                } else if (j == temp.size() - 1) {
+                    temp.add(newcard);
+                    break;
+                }
+            }
+        }
+        output.println("\n"+ player.id + "'s hand:" + temp.size());
+        for (Card card : temp) {
+            output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
+        }
+        player.setHand(temp);
+        output.flush();
     }
     public List<Player>  determineWinner( PrintWriter output) {
         List<org.example.Player>  winner = new ArrayList<>();
