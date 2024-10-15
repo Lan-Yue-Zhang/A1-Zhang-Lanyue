@@ -795,4 +795,92 @@ void RESP_01_test_01(){
         String output = outputStream.toString();
         assertTrue(output.contains("empty set of non repeated weapon cards "));
     }
+    @Test
+    @DisplayName("The game resolves the attack(s) against the each stage and the shield is increased \n")
+    void RESP_13_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+//        StringWriter output = new StringWriter();
+        //p4
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 40));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.deck.add(new Card("W",  "E", 30));
+        //p3
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        //p2
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 40));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "E", 30));
+        //p1
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 5));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("F", "F", 15));
+        newGame.deck.add(new Card("W",  "D", 5));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "H", 10));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.distributeallCards();
+
+        newGame.event_deck.add(new Card("Q",  "Q", 2));
+        newGame.draws_event_card(new Scanner(""));
+        newGame.startQRound(new Scanner(" \n \nY\nF(5)\nH(10)\nQuit\nF(15)\nS(10)\nQuit\n \n"));
+        newGame.deck.add(new Card("W",  "B", 15));
+        newGame.deck.add(new Card("W",  "S", 10));
+        newGame.deck.add(new Card("F",  "F", 30));
+        newGame.Get_Participants(new Scanner("Y\nF(5)\n \nY\nF(5)\n \nY\nF(5)\n \n"));
+        newGame.start_stage(new Scanner("D(5)\nS(10)\nQuit\n \n"));
+        newGame.start_stage(new Scanner("S(10)\nD(5)\nQuit\n \n"));
+        newGame.start_stage(new Scanner("D(5)\nH(10)\nQuit\n \n"));
+
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.deck.add(new Card("W",  "L", 20));
+        newGame.deck.add(new Card("F",  "F", 10));
+
+        newGame.Get_Participants(new Scanner("Y\n \nY\n \nY\n \n"));
+        newGame.start_stage(new Scanner("H(10)\nS(10)\nQuit\n \n"));
+        newGame.start_stage(new Scanner("B(15)\nS(10)\nQuit\n \n"));
+        newGame.start_stage(new Scanner("H(10)\nB(15)\nQuit\n \n"));
+
+        assertEquals(0,newGame.players.get(0).Get_shields());
+        assertEquals(2,newGame.players.get(2).Get_shields());
+        assertEquals(2,newGame.players.get(3).Get_shields());
+
+    }
 }
