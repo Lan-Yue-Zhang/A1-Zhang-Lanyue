@@ -129,6 +129,11 @@ public class Main {
         deck.addAll(playedCards);
         playedCards.clear();
     }
+    public void reusedeventDeck() {
+        shuffleDeck(played_eventCards);
+        event_deck.addAll(played_eventCards);
+        played_eventCards.clear();
+    }
     public void startGame() {
         scanner = new Scanner(System.in);
         output = new PrintWriter(System.out);
@@ -207,6 +212,65 @@ public class Main {
         return null;
     }
     public void Displaycard(Player player, PrintWriter output){
+
+    }
+    public List<Player>  determineWinner( PrintWriter output) {
+        List<org.example.Player>  winner = new ArrayList<>();
+        for (int i = players.size() - 1; i >= 0; i--) {
+            if (players.get(i).Get_shields() >= 7) {
+                winner.add(players.get(i));
+                output.println("The winner is: P" + players.get(i).Get_id());
+                output.flush();
+            }
+        }
+        return winner;
+    }
+    public void startRound(Scanner scanner){
+        while (determineWinner(output).isEmpty()) {
+            output.print("current player: " + players.get(current_player_round).Get_id());
+            Displaycard(players.get(current_player_round), output);
+            draws_event_card(scanner);
+            if (stage.length > 0) startQRound(scanner);
+            if (sponsor != 100) {
+                runQRound(scanner);
+                if (players_Participants.isEmpty()) endQRound(scanner);
+            }
+            output.print("current player: " + players.get(current_player_round).Get_id());
+            Displaycard(players.get(current_player_round),output);
+            Player currentPlayer = players.get(current_player_round);
+            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+            if (current_player_round < players.size()-1) current_player_round++;
+            else current_player_round = 0;
+            current_player = current_player_round;
+            if (event_deck.isEmpty()) {
+                reusedeventDeck();
+            }
+            List<Player> Winner;
+            Winner = determineWinner(output);
+            if (!Winner.isEmpty()) break;
+            clearConsole();
+        }
+        exit();
+    }
+    public static void clearConsole() {
+        for (int i = 0; i < 10; i++) {
+            System.out.println();
+        }
+    }
+    private void exit() {
+
+    }
+    public void draws_event_card(Scanner scanner){
+
+    }
+    public void startQRound(Scanner scanner){
+
+    }
+    public void runQRound(Scanner scanner){
+
+    }
+    public void endQRound(Scanner scanner){
 
     }
 
