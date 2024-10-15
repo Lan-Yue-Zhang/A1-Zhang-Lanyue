@@ -302,7 +302,46 @@ public class Main {
         output.close();
     }
     public void draws_event_card(Scanner scanner){
+        output.println();
+        Card event = event_deck.remove(event_deck.size()-1);
+        if (event.getType().equals("E")) {
+            if (event.getSuit().equals("Pl")) {
+                output.println("The current player has drawn an Plague card ");
+                int shields = players.get(current_player_round).Get_shields();
+                if (shields >= 2) {
+                    players.get(current_player_round).Set_shields(shields-2);
+                    output.println("The player "+ current_player_round +" draws this card immediately loses 2 \n" +
+                            "shields");
+                }
+            } else if (event.getSuit().equals("Qf")) {
+                output.println("The current player has drawn an Queen’s favor card");
+                distributeCards(players.get(current_player_round), 2);
+                removeCards(scanner, players.get(current_player_round));
 
+            } else {
+                output.println("The current player has drawn an Prosperity card");
+                Player currentPlayer = players.get(current_player);
+                System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+                scanner.nextLine();
+                clearConsole();
+                for (org.example.Player player : players) {
+                    current_player = player.Get_id() -1;
+                    output.print("current player: " + players.get(current_player).Get_id());
+                    Displaycard(players.get(current_player),output);
+                    distributeCards(player, 2);
+                    removeCards(scanner, player);
+                    currentPlayer = players.get(current_player);
+                    System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+                    scanner.nextLine();
+                    clearConsole();
+                }
+            }
+            played_eventCards.add(event);
+        } else {
+            int n = event.getValue();
+            stage = new int[n];
+        }
+        output.flush();
     }
     public void startQRound(Scanner scanner){
 
