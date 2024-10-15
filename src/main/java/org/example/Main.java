@@ -105,4 +105,109 @@ public class Main {
         }
     }
 
+    public void add_all_players(){
+        for (int i = 1; i <= 4; i++) {
+            players.add(new Player(0, i));
+        }
+    }
+
+    public void distributeallCards(){
+        for (Player player : players) {
+            distributeCards(player, 12);  // Distribute 12 cards to each player
+        }
+    }
+    public void distributeCards(Player player, int numCards) {
+        for (int i = 0; i < numCards; i++) {
+            if (deck.isEmpty()) {
+                reusedDeck();
+            }
+            player.addToHand(deck.remove(deck.size() - 1));
+        }
+    }
+    public void reusedDeck() {
+        shuffleDeck(playedCards);
+        deck.addAll(playedCards);
+        playedCards.clear();
+    }
+    public void startGame() {
+        scanner = new Scanner(System.in);
+        output = new PrintWriter(System.out);
+        output.println("Welcome to the game!");
+        add_all_players();
+        initializeDeck();
+        initialize_event_Deck();
+        shuffleDeck(deck);
+        shuffleDeck(event_deck);
+        output.flush();
+
+    }
+    private boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+    public boolean Check_input_card(String card){
+        if (card.matches("[A-Z]\\(\\d+\\)")) {
+            String suit = card.replaceAll("([A-Z])\\((\\d+)\\)", "$1");
+            int number = Integer.parseInt(card.replaceAll("([A-Z])\\((\\d+)\\)", "$2"));
+            if (number > 70 || number < 5) return false;
+            return switch (suit) {
+                case "S" -> number == 10;
+                case "H" -> number == 10;
+                case "D" -> number == 5;
+                case "B" -> number == 15;
+                case "L" -> number == 20;
+                case "E" -> number == 30;
+                case "F" ->
+                        (number == 5 || number == 10 || number == 15 || number == 20 || number == 25 || number == 30 || number == 35 || number == 40 || number == 50 || number == 70);
+                default -> false;
+            };
+        } else {
+            return false;
+        }
+    }
+    public Card playCard(Scanner scanner, Player player) {
+        Displaycard(player, output);
+        output.println("\n Enter the card you want to draw (e.g. S(10)) or position: ");
+        output.flush();
+        String temp = scanner.nextLine();
+        if (!temp.isEmpty() && Check_input_card(temp)){
+            String suit = temp.substring(0, 1);
+            int value = Integer.parseInt(temp.substring(temp.indexOf("(") + 1, temp.indexOf(")")));
+            Card c = player.playedCard(suit,value);
+            if (c != null) {
+                playedCards.add(c);
+                output.println("You removed the card ");
+                output.print(" "+ c.getSuit() + "(" + c.getValue() + ")\n");
+                output.flush();
+                return c;
+            } else output.print("Please enter the card you have \n");
+        } else if (isInteger(temp)) {
+            int position = Integer.parseInt(temp);
+            if (position >= 1 && position <= player.getHand().size()) {
+                Card c = player.getHand().get(position - 1);
+                playedCards.add(c);
+                player.getHand().remove(position - 1);
+                output.println("You removed the card: ");
+                output.println(" "+ c.getSuit() + "(" + c.getValue() + ")\n");
+                output.flush();
+                return c;
+            } else {
+                output.println("Invalid position. Please enter a valid card position.");
+            }
+            Displaycard(player,output);
+        } else {
+            output.print("Please enter according to the format again \n");
+        }
+
+        output.flush();
+        return null;
+    }
+    public void Displaycard(Player player, PrintWriter output){
+
+    }
+
 }
