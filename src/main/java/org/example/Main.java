@@ -314,4 +314,11 @@ public class Main {
 
     }
 
+    public void removeCards(Scanner scanner, Player player){
+        while (player.getHand().size() > 12) {
+            output.println("Player "+player.Get_id() +" need remove "+ (player.getHand().size() - 12) + " Cards");
+            playCard(scanner, player);
+        }
+    }
+
 }
