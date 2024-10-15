@@ -5,6 +5,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -117,5 +119,20 @@ void RESP_01_test_01(){
         assertEquals(99, newGame.deck.size());
         assertEquals(0, newGame.playedCards.size());
 
+    }
+    @Test
+    @DisplayName("if one or more players have 7 shield.\n")
+    void RESP_03_test_01(){
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+        Main newGame = new Main();
+        newGame.startGame();
+        newGame.players.get(0).Set_shields(7);
+        newGame.distributeallCards();
+        newGame.startRound(new Scanner(""));
+        System.setOut(originalOut);
+        String output = outputStream.toString();
+        assertTrue(output.contains("The winner is: P1"));
     }
 }
