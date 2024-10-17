@@ -616,11 +616,11 @@ public class Main {
                 }
                 output.flush();
             } else if (temp.contains("Quit")) {
+                if (current_player == players_Participants.get(players_Participants.size()-1).Get_id() -1) {
+                    stage[round] = 0;
+                }
                 if (!players.get(current_player).getAttackValueDeck().isEmpty()) {
                     int value = stage[round];
-                    if (current_player == players_Participants.get(players_Participants.size()-1).Get_id() -1) {
-                        stage[round] = 0;
-                    }
                     output.print("\n The value of the cards used in this stage is "+ players.get(current_player).calculateAttackValue() + " : ");
                     for (Card card : players.get(current_player).getAttackValueDeck()) {
                         output.print(" "+ card.getSuit() + "(" + card.getValue() + ") ");
