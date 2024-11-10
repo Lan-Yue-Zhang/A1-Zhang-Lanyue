@@ -5,8 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="13b5f6a1-645a-4dfa-830d-7a2ea44d2ffb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+<<<<<<< Updated upstream
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Player.java" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,7 +42,11 @@
     </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+<<<<<<< Updated upstream
+        <entry key="$PROJECT_DIR$" value="A2" />
+=======
+        <entry key="$PROJECT_DIR$" value="A2-Zhang-Lanyue-101192831" />
+>>>>>>> Stashed changes
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -54,20 +63,41 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
-    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "A2",
-    "onboarding.tips.debug.path": "D:/下载/COMP4004/A1-4004/src/main/java/org/example/Main.java",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+<<<<<<< Updated upstream
+    &quot;JUnit.AcceptanceTest.executor&quot;: &quot;Run&quot;,
+=======
+    &quot;Cucumber Java.Scenario: .executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: A1 scenario.executor&quot;: &quot;Run&quot;,
+    &quot;Cucumber Java.Scenario: A1_scenario.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.AcceptanceTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CucumberStep.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.CucumberStep.rig_a_new_game_of_blackjack_starts.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.RESP_06_test_01.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.MainTest.executor&quot;: &quot;Run&quot;,
+    &quot;JUnit.RunCucumberTest.executor&quot;: &quot;Run&quot;,
+>>>>>>> Stashed changes
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
+    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;A2-test&quot;,
+<<<<<<< Updated upstream
+=======
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+>>>>>>> Stashed changes
+    &quot;onboarding.tips.debug.path&quot;: &quot;D:/下载/COMP4004/A1-4004/src/main/java/org/example/Main.java&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+<<<<<<< Updated upstream
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
+=======
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;
+>>>>>>> Stashed changes
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
@@ -76,8 +106,47 @@
       <recent name="org.example" />
     </key>
   </component>
-  <component name="RunManager">
-    <configuration name="MainTest.RESP_07_test_01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="JUnit.RunCucumberTest">
+    <configuration name="Scenario: A1 scenario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/A2_Tests.feature" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="A1-4004" />
+      <option name="NAME_FILTER" value="^A1 scenario$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^A1 scenario$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: A1 scenario" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Scenario: A1_scenario" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+      <option name="CUCUMBER_CORE_VERSION" value="5" />
+      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/A2_Tests.feature" />
+      <option name="GLUE" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+      <module name="A1-4004" />
+      <option name="NAME_FILTER" value="^A1_scenario$" />
+      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^A1_scenario$&quot;" />
+      <option name="SUGGESTED_NAME" value="Scenario: A1_scenario" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="io.cucumber.core.cli.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CucumberStep.rig_a_new_game_of_blackjack_starts" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="A1-4004" />
       <extension name="coverage">
         <pattern>
@@ -86,14 +155,14 @@
         </pattern>
       </extension>
       <option name="PACKAGE_NAME" value="org.example" />
-      <option name="MAIN_CLASS_NAME" value="org.example.MainTest" />
-      <option name="METHOD_NAME" value="RESP_07_test_01" />
+      <option name="MAIN_CLASS_NAME" value="org.example.CucumberStep" />
+      <option name="METHOD_NAME" value="rig_a_new_game_of_blackjack_starts" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MainTest.RESP_08_test_03" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="MainTest.RESP_06_test_01" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="A1-4004" />
       <extension name="coverage">
         <pattern>
@@ -103,8 +172,23 @@
       </extension>
       <option name="PACKAGE_NAME" value="org.example" />
       <option name="MAIN_CLASS_NAME" value="org.example.MainTest" />
-      <option name="METHOD_NAME" value="RESP_08_test_03" />
+      <option name="METHOD_NAME" value="RESP_06_test_01" />
       <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="RunCucumberTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="A1-4004" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.example.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="org.example" />
+      <option name="MAIN_CLASS_NAME" value="org.example.RunCucumberTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -124,6 +208,7 @@
     </configuration>
     <configuration default="true" type="PythonConfigurationType" factoryName="Python">
       <module name="A1-Zhang-Lanyue-101192831" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -145,6 +230,7 @@
     </configuration>
     <configuration default="true" type="Tox" factoryName="Tox">
       <module name="A1-Zhang-Lanyue-101192831" />
+      <option name="ENV_FILES" value="" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <option name="SDK_HOME" value="" />
@@ -156,8 +242,19 @@
     </configuration>
     <recent_temporary>
       <list>
+<<<<<<< Updated upstream
+        <item itemvalue="JUnit.MainTest.RESP_08_test_03" />
         <item itemvalue="JUnit.MainTest.RESP_07_test_01" />
         <item itemvalue="JUnit.MainTest.RESP_08_test_03" />
+        <item itemvalue="JUnit.MainTest.RESP_07_test_01" />
+        <item itemvalue="JUnit.MainTest.RESP_07_test_01" />
+=======
+        <item itemvalue="JUnit.RunCucumberTest" />
+        <item itemvalue="JUnit.MainTest.RESP_06_test_01" />
+        <item itemvalue="Cucumber Java.Scenario: A1 scenario" />
+        <item itemvalue="JUnit.CucumberStep.rig_a_new_game_of_blackjack_starts" />
+        <item itemvalue="Cucumber Java.Scenario: A1_scenario" />
+>>>>>>> Stashed changes
       </list>
     </recent_temporary>
   </component>
@@ -171,5 +268,25 @@
       <updated>1728497157860</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <breakpoint enabled="true" type="java-exception">
+          <properties class="java.lang.NullPointerException" package="java.lang" />
+          <option name="timeStamp" value="1" />
+        </breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/org/example/Player.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/A1_Zhang_Lanyue_101192831$Scenario__A1_scenario.ic" NAME="Scenario: A1_scenario 覆盖结果" MODIFIED="1730926822071" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true">
+      <FILTER>io.cucumber.core.cli.*</FILTER>
+    </SUITE>
   </component>
 </project>

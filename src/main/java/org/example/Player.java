@@ -17,6 +17,13 @@ public class Player {
         this.AttackValueDeck = new ArrayList<>();
         this.eligible = true;
     }
+    public Player(Player other) {
+        this.shields = other.shields;
+        this.id = other.id;
+        this.hand = new ArrayList<>(other.hand);
+        this.AttackValueDeck = new ArrayList<>(other.AttackValueDeck);
+        this.eligible = other.eligible;
+    }
 
     int Get_shields() {
         return shields;
