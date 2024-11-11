@@ -264,14 +264,29 @@ public class Main {
     }
     public List<Player>  determineWinner( PrintWriter output) {
         List<Player>  winner = new ArrayList<>();
-        for (int i = players.size() - 1; i >= 0; i--) {
+        for (int i = 0 ; i < players.size(); i++) {
             if (players.get(i).Get_shields() >= 7) {
                 winner.add(players.get(i));
-                System.out.println("The winner is: P" + players.get(i).Get_id());
-                System.out.flush();
+                output.println("The winner is: P" + players.get(i).Get_id());
+                output.flush();
             }
         }
         return winner;
+    }
+    public void nextRound(Scanner scanner) {
+        if (current_player != current_player_round) {
+            System.out.print("current player: " + players.get(current_player_round).Get_id());
+            Displaycard(players.get(current_player_round),output);
+            Player currentPlayer = players.get(current_player_round);
+            System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
+            scanner.nextLine();
+        }
+        if (current_player_round < players.size()-1) current_player_round++;
+        else current_player_round = 0;
+        current_player = current_player_round;
+        if (event_deck.isEmpty()) {
+            reusedeventDeck();
+        }
     }
     public void startRound(Scanner scanner){
         while (determineWinner(output).isEmpty()) {
@@ -282,19 +297,7 @@ public class Main {
             if (sponsor != 100) {
                 runQRound(scanner);
             }
-            if (current_player != current_player_round) {
-                System.out.print("current player: " + players.get(current_player_round).Get_id());
-                Displaycard(players.get(current_player_round),output);
-                Player currentPlayer = players.get(current_player_round);
-                System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
-                scanner.nextLine();
-            }
-            if (current_player_round < players.size()-1) current_player_round++;
-            else current_player_round = 0;
-            current_player = current_player_round;
-            if (event_deck.isEmpty()) {
-                reusedeventDeck();
-            }
+            nextRound(scanner);
             List<Player> Winner;
             Winner = determineWinner(output);
             if (!Winner.isEmpty()) break;
@@ -604,7 +607,9 @@ public class Main {
                 int value = Integer.parseInt(temp.substring(temp.indexOf("(") + 1, temp.indexOf(")")));
                 int c = hasCard(players.get(current_player),suit,value);
                 if (c != 100) {
-                    if (suit.equals("F")) System.out.println("Please enter the weapon card you have \n");
+                    if (suit.equals("F")) {
+                        System.out.println("Please enter the weapon card you have \n");
+                    }
                     else {
                         if (!players.get(current_player).getAttackValueDeck().contains(players.get(current_player).getHand().get(c))) {
                             players.get(current_player).addToAttackValueDeck(players.get(current_player).getHand().get(c));
@@ -655,7 +660,6 @@ public class Main {
                         if (round == stage.length-1) {
                             int shields = players.get(current_player).Get_shields();
                             players.get(current_player).Set_shields(shields + stage.length);
-                            players_Participants.remove(players.get(current_player));
                         }
                         System.out.println("\n current stage win \n");
                     } else {
@@ -666,7 +670,6 @@ public class Main {
                     players_Participants.remove(players.get(current_player));
                     System.out.println("empty set of non repeated weapon cards \n");
                 }
-
                 System.out.flush();
                 players.get(current_player).cleanAttackValueDeck();
                 done = false;
@@ -675,15 +678,19 @@ public class Main {
             }
             System.out.flush();
         }
-        if (current_player != next_players || players_Participants.isEmpty()) {
+        if (current_player != next_players) {
             Player currentPlayer = players.get(current_player);
             System.out.println("P"+currentPlayer.Get_id() + ", please leave the hot seat. Press <return> to continue...");
             scanner.nextLine();
             clearConsole();
+        } else if (players_Participants.isEmpty()) {
+            System.out.println("The quest ends with no winner\n");
         }
         current_player = next_players;
+
     }
     public void setParticipants() {
+        players_Participants.clear();
         players_Participants.addAll(players);
         players_Participants.remove(players.get(sponsor));
         current_player = players_Participants.getFirst().id-1;
@@ -718,7 +725,7 @@ public class Main {
         endQRound(scanner);
     }
     public void endQRound(Scanner scanner){
-
+        current_player = sponsor;
         distributeCards(players.get(sponsor), addcard);
         if (players.get(sponsor).getHand().size() > 12) {
             System.out.println("current player: " + players.get(sponsor).Get_id());
