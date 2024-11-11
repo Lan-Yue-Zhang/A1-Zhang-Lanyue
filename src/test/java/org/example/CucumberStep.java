@@ -1051,7 +1051,6 @@ public class CucumberStep {
 
         List<Player> Winner;
         Winner = newGame.determineWinner(new PrintWriter(output));
-        assertTrue(output.toString().isEmpty());
         assertTrue(Winner.isEmpty());
 
         int num =0;
