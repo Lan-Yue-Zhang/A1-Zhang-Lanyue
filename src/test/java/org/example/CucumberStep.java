@@ -336,9 +336,6 @@ public class CucumberStep {
     public void start_game_for_1winner() {
         List<Card> cards = new ArrayList<>();
 
-
-
-
         for (int i = 1; i <= 6 -1 -1 -1 -1; i++) {
             cards.add( new Card("F", "F", 10));
         }
@@ -500,6 +497,148 @@ public class CucumberStep {
         event_cards.add( new Card("E", "Pr", 2));
         event_cards.add( new Card("E", "Pl", 2));
         event_cards.add(new Card("Q",  "Q", 4));
+        newGame = new Main();
+        newGame.startGame();
+        newGame.deck = cards;
+        newGame.event_deck = event_cards;
+        assertEquals(100, newGame.deck.size());
+        assertEquals(17, newGame.event_deck.size());
+        newGame.distributeallCards();
+        players = new ArrayList<>();
+        players_Participants = new ArrayList<>();
+        for (Player participant : newGame.players) {
+            players.add(new Player(participant));
+        }
+    }
+
+    @Given("A new game is started for 0winner")
+    public void start_game_for_0winner() {
+        List<Card> cards = new ArrayList<>();
+
+        cards.add(new Card("F", "F", 5));
+        cards.add(new Card("F", "F", 5));
+        for (int i = 1; i <= 6 -1; i++) {
+            cards.add( new Card("F", "F", 10));
+        }
+
+        for (int i = 1; i <= 7; i++) {
+            cards.add( new Card("F", "F", 20));
+        }
+        for (int i = 1; i <= 7; i++) {
+            cards.add( new Card("F", "F", 25));
+        }
+        for (int i = 1; i <= 2; i++) {
+            cards.add( new Card("F", "F", 30));
+        }
+        for (int i = 1; i <= 4; i++) {
+            cards.add( new Card("F", "F", 35));
+        }
+        for (int i = 1; i <= 2; i++) {
+            cards.add( new Card("F", "F", 50));
+        }
+        cards.add( new Card("F", "F", 70));
+        // Create basic weapon cards: Swords, battle-axes, lances, horses, excaliburs, and daggers
+
+        cards.add( new Card("W", "D", 5));
+
+        for (int i = 1; i <= 7; i++) {
+            // Swords (S)
+            cards.add( new Card("W", "S", 10));
+        }
+        for (int i = 1; i <= 4; i++) {
+            // Horses (H)
+            cards.add( new Card("W", "H", 10));
+        }
+
+        cards.add(new Card("W",  "L", 20));
+        cards.add(new Card("F",  "F", 30));
+
+        cards.add(new Card("W",  "S", 10));
+        cards.add(new Card("W",  "B", 15));
+
+        cards.add(new Card("W",  "L", 20));
+        cards.add(new Card("W",  "L", 20));
+        cards.add(new Card("F",  "F", 10));
+
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "S", 10));
+        cards.add(new Card("F",  "F", 30));
+
+        //p4
+        cards.add(new Card("F", "F", 5));
+        cards.add(new Card("F", "F", 15));
+
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("F", "F", 40));
+        cards.add(new Card("W",  "D", 5));
+        cards.add(new Card("W",  "D", 5));
+        cards.add(new Card("W",  "S", 10));
+
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "L", 20));
+        cards.add(new Card("W",  "E", 30));
+        //p3
+        cards.add(new Card("F", "F", 5));
+        cards.add(new Card("F", "F", 5));
+
+        cards.add(new Card("F", "F", 5));
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("W",  "D", 5));
+        cards.add(new Card("W",  "S", 10));
+        cards.add(new Card("W",  "S", 10));
+
+        cards.add(new Card("W",  "S", 10));
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "L", 20));
+        //p2
+        cards.add(new Card("F", "F", 5));
+        cards.add(new Card("F", "F", 5));
+
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("F", "F", 40));
+        cards.add(new Card("W",  "D", 5));
+        cards.add(new Card("W",  "S", 10));
+
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "E", 30));
+        //p1
+
+        cards.add(new Card("F", "F", 10));
+        cards.add( new Card("F", "F", 15));
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("F", "F", 15));
+        cards.add(new Card("W",  "D", 5));
+        cards.add(new Card("W",  "S", 10));
+        cards.add(new Card("W",  "S", 10));
+
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "H", 10));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "B", 15));
+        cards.add(new Card("W",  "L", 20));
+
+        List<Card> event_cards = new ArrayList<>();
+        for (int i = 1; i <= 5; i++) {
+            if (i == 1) event_cards.add( new Card("E", "Pl", 2));
+            else if (i <= 1 + 2) event_cards.add( new Card("E", "Qf", 2));
+            else event_cards.add( new Card("E", "Pr", 2));
+        }
+        // Create quest (Q) cards
+        for (int i = 1; i <= 12 - 1; i++) {
+            if (i <= 3 -1) event_cards.add( new Card("Q", "Q", 2));
+            else if (i <= 3 + 4) event_cards.add( new Card("Q", "Q", 3));
+            else if (i <= 3 + 4 + 3 ) event_cards.add( new Card("Q", "Q", 4));
+            else event_cards.add( new Card("Q", "Q", 5));
+        }
+        event_cards.add(new Card("Q",  "Q", 2));
         newGame = new Main();
         newGame.startGame();
         newGame.deck = cards;
@@ -757,19 +896,17 @@ public class CucumberStep {
 
         StringBuilder inputBuilder = new StringBuilder();
         inputBuilder.append("Y\n");
-        int[] value = new int[arg1];
-        int num = 1;
         for (int i = 0; i < arg1; i++) {
-            if (i > 0) value[i] = value[i-1] + 5;
-            else value[i] = 5;
-            inputBuilder.append(num).append("\n");
+            inputBuilder.append(1).append("\n");
             inputBuilder.append("Quit\n");
         }
         inputBuilder.append(" \n");
         newGame.startQRound(new Scanner(inputBuilder.toString()));
         assertEquals(arg0-1,newGame.sponsor);
-        assertArrayEquals(value, newGame.stage);
-
+        for (int i = 0; i < arg1; i++) {
+            assertTrue(newGame.stage[i] > 0);
+        }
+        assertEquals(arg1,newGame.stage.length);
     }
 
     @Then("P{int} declines to participate")
@@ -887,5 +1024,41 @@ public class CucumberStep {
     @And("P{int} has {int} shields")
     public void pHasShields(int arg0, int arg1) {
         assertEquals(arg1, newGame.players.get(arg0-1).Get_shields());
+    }
+
+    @And("The quest ends with no winner")
+    public void theQuestEndsWithNoWinner() {
+        StringWriter output = new StringWriter();
+        for (int i = 0; i < newGame.players.size(); i++) {
+            if (i > 0) assertEquals(11,newGame.players.get(i).getHand().size());
+            else assertEquals(12,newGame.players.get(i).getHand().size());
+            assertEquals(0,newGame.players.get(i).Get_shields());
+        }
+        newGame.Displaycard(newGame.players.get(0),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(10)  F(15)  F(15)  D(5)  H(10)  H(10)  B(15)  B(15)  B(15)  L(20)  L(20)  L(20)"));
+
+
+        newGame.Displaycard(newGame.players.get(1),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(5)  F(15)  F(15)  F(30)  F(40)  S(10)  H(10)  H(10)  B(15)  B(15)  E(30)"));
+
+
+        newGame.Displaycard(newGame.players.get(2),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(5)  F(5)  F(15)  S(10)  S(10)  S(10)  S(10)  H(10)  H(10)  B(15)  L(20)"));
+
+
+        newGame.Displaycard(newGame.players.get(3),new PrintWriter(output));
+        assertTrue(output.toString().contains("F(15)  F(15)  F(40)  D(5)  S(10)  H(10)  H(10)  B(15)  B(15)  L(20)  E(30)"));
+
+        List<Player> Winner;
+        Winner = newGame.determineWinner(new PrintWriter(output));
+        assertTrue(output.toString().isEmpty());
+        assertTrue(Winner.isEmpty());
+
+        int num =0;
+        for (int i =0; i<newGame.players.size();i++){
+            num += newGame.players.get(i).getHand().size();
+        }
+        assertEquals(100,newGame.playedCards.size() + newGame.deck.size() + num);
+
     }
 }

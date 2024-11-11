@@ -198,23 +198,22 @@ Feature: A2 Assignment
     And P3 are declared winners and has 7 shields
 
 
-#  Scenario: 0_winner_quest
-#    Given A new game is started
-#    When P1 draws a quest of 2 stages
-#    Then P1 is sponsors and builds the 2 stages
-##    Stage 1:
-#    Then P2 is decides to participate and draws "F(30)" discards "F(5)"
-#    And P3 is decides to participate and draws "S(10)" discards "F(5)"
-#    And P4 is decides to participate and draws "B(15)" discards "F(5)"
-#    Then P2 draws " " value of 15
-#    And P3 draws " " value of 0
-#    And P4 draws " " value of 15
-#    And "P2" loses and cannot go to the next stage
-#    And "P3" loses and cannot go to the next stage
-#    And "P4" loses and cannot go to the next stage
-#    And 3 participants discard the cards
+  Scenario: 0_winner_quest
+    Given A new game is started for 0winner
+    When P1 draws a quest of 2 stages
+    Then P1 is sponsors and builds the 2 stages
+#    Stage 1:
+    Then P2 is decides to participate and draws "F(30)" discards "F(5)"
+    And P3 is decides to participate and draws "S(10)" discards "F(5)"
+    And P4 is decides to participate and draws "B(15)" discards "F(5)"
+    Then P2 draws "D(5)" value of 5
+    And P3 draws "D(5)" value of 5
+    And P4 draws "D(5)" value of 5
+    And "P2" loses and cannot go to the next stage
+    And "P3" loses and cannot go to the next stage
+    And "P4" loses and cannot go to the next stage
+    And 3 participants discard the cards
 
-#  P1 draws a 2 stage quest and decides to sponsor it. P1 builds 2 stages
-#  • P2, P3 and P4 par@cipate in stage 1 and all lose stage 1!
-#  • The quest ends with no winner but P1 does discards and draws. (Here you need to
-#  figure out what to assert to confirm this outcome J.)
+    Then P1 discards 2 cards and draws 4 random cards and then has 12 cards
+    And The quest ends with no winner
+
