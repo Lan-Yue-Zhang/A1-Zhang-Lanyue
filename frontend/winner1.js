@@ -908,12 +908,7 @@ async function winner1_game_with_events() {
     }
 }
 
-async function runScenarios() {
+winner1_game_with_events();
 
-    await winner1_game_with_events();
-
-}
-
-runScenarios();
 
 
