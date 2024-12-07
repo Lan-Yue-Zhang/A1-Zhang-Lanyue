@@ -253,6 +253,4 @@ async function winner0_quest() {
 winner0_quest();
 
 
-runScenarios();
-
 

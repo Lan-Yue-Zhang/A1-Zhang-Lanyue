@@ -490,10 +490,7 @@ async function A1_scenario() {
     }
 }
 
-async function runScenarios() {
-    await A1_scenario();
-}
+A1_scenario();
 
-runScenarios();
 
 
