@@ -250,9 +250,8 @@ async function winner0_quest() {
     }
 }
 
-async function runScenarios() {
-    await winner0_quest();
-}
+winner0_quest();
+
 
 runScenarios();
 
