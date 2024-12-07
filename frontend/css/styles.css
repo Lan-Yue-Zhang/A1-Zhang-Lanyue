@@ -1,0 +1,100 @@
+
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(135deg, #d9d2e9, #d9ead3);
+    color: #ffffff;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+.header {
+  padding: 20px;
+  text-align: center;
+}
+
+.container {
+    margin-left: 8%;
+    margin-right: 10%;
+    display: inline-block;
+    text-align: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+
+    width: 80%;
+}
+
+h1 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    color: #ffcc00;
+    text-shadow: 2px 2px #000;
+}
+
+button {
+    text-align: center;
+    background-color: #a6c5e1
+    color: #1a1a2e;
+    font-size: 1.2em;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+button.active {
+    background-color: #007bff;
+    color: #ffffff;
+    transform: scale(1.5);
+}
+
+#startBtn {
+    font-size: 1.2em;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    color: #ffcc00;
+}
+
+#startBtn:active {
+    background-color: #28a745;
+    color: #ffffff;
+    transform: scale(1.5);
+}
+
+#player-cards {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 10px 0;
+}
+.card {
+    color: black;
+    padding: 20px 5px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+#game-status {
+    font-size: 1.2em;
+    margin-top: 20px;
+    padding: 15px;
+    background-color: #333;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+    color: #ffcc00;
+}

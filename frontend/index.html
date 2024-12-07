@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A3 Game</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="js/game.js"></script>
+</head>
+<body>
+<div class="header">
+    <h1>A3 Game</h1>
+    <button id="startBtn" onclick="startGame()">
+        Start Game
+    </button>
+    <button id="2winner_game_2winner_quest" onclick="winner2()">
+        2winner_game_2winner_quest
+    </button>
+    <button id="1winner_game_with_events" onclick="winner1()">
+        1winner_game_with_events
+    </button>
+    <button id="0_winner_quest" onclick="winner0()">
+        0_winner_quest
+    </button>
+    <button id="A1_scenario" onclick="A1_scenario()">
+        A1_scenario
+    </button>
+</div>
+
+<div id="game-container" style="visibility: hidden" class="container">
+    <p id="game-status"></p>
+    <p id="display_hands"> display the hands </p>
+    <p id="player-shields" style="white-space: pre;" >P1 shields:0    P2 shields:0    P3 shields:0    P4 shields:0 </p>
+    <p id="player-cards-number" style="white-space: pre;" >P1 cards:12    P2 cards:12    P3  cards:12    P4 cards:12 </p>
+    <div class="player">
+        <h2 id="player-id">P1</h2>
+        <p id="Stage" >Stage: 0</p>
+        <div id="player-cards"></div>
+    </div>
+    <div class="controls">
+        <button id="Quit-button"  disabled>Quit</button>
+        <button id="Yes-button"  disabled>Yes</button>
+        <button id="No-button"  disabled>No</button>
+        <button id="draw-button" onclick="drawEventCard()" disabled>Draw Event card</button>
+        <button id="Leave-button" onclick="leave()" disabled>Leave</button>
+    </div>
+</div>
+
+</body>
+</html>
