@@ -673,10 +673,7 @@ async function winner2_game_2winner_quest() {
     }
 }
 
-async function runScenarios() {
-    await winner2_game_2winner_quest();
-}
+winner2_game_2winner_quest();
 
-runScenarios();
 
 
