@@ -4,7 +4,33 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="13b5f6a1-645a-4dfa-830d-7a2ea44d2ffb" name="Changes" comment="" />
+    <list default="true" id="13b5f6a1-645a-4dfa-830d-7a2ea44d2ffb" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_13_54_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_13_54__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_14_00_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_14_00__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_14_08_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_2024_11_6_14_08__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_rebase__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_1.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_2.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_3.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_4.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_5.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/__Changes_6.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]1/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]2/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]3/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]4/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]5/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/在变基之前未提交的更改_[Changes]6/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,15 +39,15 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JUnit5 Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="A2-test-1" />
+        <entry key="$PROJECT_DIR$" value="A2-Zhang-Lanyue-101192831" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -45,12 +71,19 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
     "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
-    "git-widget-placeholder": "A2-Zhang-Lanyue-101192831",
+    "git-widget-placeholder": "A3-Zhang-Lanyue-101192831",
     "kotlin-language-version-configured": "true",
-    "onboarding.tips.debug.path": "D:/下载/COMP4004/A1-4004/src/main/java/org/example/Main.java"
+    "last_opened_file_path": "D:/下载/COMP4004/new/A1-Zhang-Lanyue-101192831",
+    "onboarding.tips.debug.path": "D:/下载/COMP4004/A1-4004/src/main/java/org/example/Main.java",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\下载\COMP4004\new\A1-Zhang-Lanyue-101192831" />
+    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -156,7 +189,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="JUnit.RunCucumberTest" />
+        <item itemvalue="JUnit.MainTest.RESP_08_test_03" />
         <item itemvalue="JUnit.MainTest.RESP_07_test_01" />
+        <item itemvalue="JUnit.RunCucumberTest" />
         <item itemvalue="JUnit.MainTest.RESP_08_test_03" />
       </list>
     </recent_temporary>
