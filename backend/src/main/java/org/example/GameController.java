@@ -1009,32 +1009,6 @@ public class GameController {
         num_Participants = newGame.players_Participants.size();
         return temp;
     }
-//    @GetMapping("/endQRound")
-//    public String endQRound(@RequestParam int playerIndex) {
-//        if (playerIndex < 0 || playerIndex >= newGame.players.size()) {
-//            return "Invalid player index.";
-//        }
-//        int shields = newGame.players.get(playerIndex).Get_shields();
-//        return "Player " + playerIndex + " has " + shields + " shields.";
-//    }
-
-
-
-
-
-//    @PostMapping("/endQRound")
-//    public String endQRound(@RequestParam(required = false, defaultValue = "1\n1\n1\n1\n") String input) {
-//        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-//        PrintStream originalOut = System.out;
-//        System.setOut(new PrintStream(outputStream));
-//
-//        newGame.endQRound(new Scanner(input));
-//
-//        System.setOut(originalOut);
-//        String output = outputStream.toString().trim();
-//
-//        return "Quest round ended:\n" + output;
-//    }
 
 }
 
